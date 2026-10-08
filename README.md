@@ -6,13 +6,13 @@ Single-page, single-action lead capture page for the RetireFlow IUL Meta campaig
 - `styles.css`: RetireFlow brand styles (navy `#041C3B`, teal `#087B82`, Poppins)
 - `script.js`: form validation, submission, UTM/fbclid capture, Meta Pixel `Lead` event
 - `assets/`: logo (color + white), favicon
-- `api/lead.js`: Vercel serverless function the form posts to. Emails the lead a confirmation, emails you a new-lead notification through [Resend](https://resend.com), and adds the lead to the Google Sheet.
+- `netlify/functions/lead.js`: Netlify function the form posts to (at `/api/lead`, routed by `netlify.toml`). Emails the lead a confirmation, emails you a new-lead notification through [Resend](https://resend.com), and adds the lead to the Google Sheet.
 - `google-apps-script/Code.gs`: script that lives in the "RetireFlow IUL Leads" Google Sheet and appends each lead as a row.
 
-## Email setup (Resend + Vercel)
+## Email setup (Resend + Netlify)
 
 1. **Resend:** create an account, add and verify your sending domain (Domains > Add Domain, then add the DNS records it gives you), and create an API key.
-2. **Vercel:** import this repo as a new project (no build settings needed). Under Settings > Environment Variables, add:
+2. **Netlify:** Add new site > Import an existing project > pick this GitHub repo and branch. Leave the build command blank; `netlify.toml` sets the rest. Then under Site configuration > Environment variables, add:
 
    | Variable | Required | Example |
    |---|---|---|
@@ -24,12 +24,12 @@ Single-page, single-action lead capture page for the RetireFlow IUL Meta campaig
    | `CALLBACK_PHONE` | no | number agents call from, shown in the confirmation email |
    | `TIMEZONE` | no | time zone for submission times (default `America/New_York`) |
 
-3. Redeploy after adding the variables, then submit a test lead with your own email.
+3. Redeploy after adding the variables (Deploys > Trigger deploy), then submit a test lead with your own email.
 
 How it behaves:
 - The lead gets "Your free IUL information request is confirmed" right away. Replies go to you.
 - You get "New IUL lead: Name (State)" with their details, ad tracking (UTM tags), and Call/Email buttons. Hitting reply writes to the lead.
-- If neither the notification email nor the Google Sheet row goes through, the visitor sees an error and can retry, so a lead is never silently lost. Any individual failure is logged in Vercel.
+- If neither the notification email nor the Google Sheet row goes through, the visitor sees an error and can retry, so a lead is never silently lost. Any individual failure is logged under Netlify > Logs > Functions > lead.
 - A hidden spam-trap field quietly drops most bot submissions.
 
 ## Google Sheet setup
@@ -40,7 +40,7 @@ Leads are added to the [RetireFlow IUL Leads](https://docs.google.com/spreadshee
 2. Open the sheet and go to **Extensions > Apps Script**. Delete what's in `Code.gs`, paste in the contents of `google-apps-script/Code.gs`, and save.
 3. In Apps Script, click **Project Settings** (gear icon) > **Script Properties** > **Add script property**: name `SHEETS_SECRET`, value = your password from step 1. Save.
 4. Click **Deploy > New deployment**, choose type **Web app**, set *Execute as* **Me** and *Who has access* **Anyone**, and click Deploy. Approve the Google permissions prompt. Copy the **Web app URL**.
-5. In Vercel, add `SHEETS_WEBHOOK_URL` (the Web app URL) and `SHEETS_SECRET` (the same password), then redeploy.
+5. In Netlify, add `SHEETS_WEBHOOK_URL` (the Web app URL) and `SHEETS_SECRET` (the same password), then redeploy.
 
 On the first lead, the script renames the empty `Sheet1` tab to `Leads` and adds a header row: Submitted, First Name, Last Name, Email, Phone, State, Most Important, Consent to Contact, Status, Notes, the UTM columns, FB Click ID, and Page. **Status** starts as "New" and has a dropdown (Contacted, Session Booked, Session Held, Not Interested, No Answer) for tracking follow-up.
 
@@ -50,7 +50,7 @@ A lead counts as captured if either the notification email or the sheet row succ
 
 ## Before launch
 
-1. **Email.** Complete the Resend + Vercel setup above. The form posts to `/api/lead` (set on `<form id="lead-form" data-endpoint="/api/lead">`).
+1. **Email.** Complete the Resend + Netlify setup above. The form posts to `/api/lead` (set on `<form id="lead-form" data-endpoint="/api/lead">`).
 2. **Meta Pixel.** Add your Pixel base code in `<head>`. The script fires `fbq('track', 'Lead')` on a successful submit.
 3. **Fill placeholders** (search for `[`): states licensed, families served, agency license #, Remove any trust-strip item if you can't make them accurate.
 4. **State dropdown.** Trim it to the states you're licensed in.

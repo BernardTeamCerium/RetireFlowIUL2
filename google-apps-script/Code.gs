@@ -4,10 +4,10 @@
  * Setup (once):
  *   1. In the "RetireFlow IUL Leads" sheet: Extensions > Apps Script. Replace Code.gs with this file and save.
  *   2. Project Settings (gear) > Script Properties > Add property:
- *        SHEETS_SECRET = a long random string (use the same value in Vercel's SHEETS_SECRET)
+ *        SHEETS_SECRET = a long random string (use the same value in Netlify's SHEETS_SECRET)
  *   3. Deploy > New deployment > type "Web app":
  *        Execute as: Me    Who has access: Anyone
- *      Authorize when asked, then copy the Web app URL into Vercel's SHEETS_WEBHOOK_URL.
+ *      Authorize when asked, then copy the Web app URL into Netlify's SHEETS_WEBHOOK_URL.
  *   If you edit this script later: Deploy > Manage deployments > edit > Version: New version.
  */
 

@@ -1,7 +1,7 @@
-// Vercel serverless function: POST /api/lead
+// Netlify function: POST /api/lead (redirected here by netlify.toml)
 // Sends the lead a confirmation email and sends RetireFlow a new-lead notification via Resend.
 //
-// Environment variables (set in Vercel > Project > Settings > Environment Variables):
+// Environment variables (set in Netlify > Site configuration > Environment variables):
 //   RESEND_API_KEY   required  Resend API key
 //   FROM_EMAIL       required  Sender on a domain verified in Resend, e.g. "RetireFlow <info@retireflow.com>"
 //   NOTIFY_EMAIL     required  Where new-lead notifications go (comma-separate for several)
@@ -217,29 +217,39 @@ function notificationEmail(lead, env) {
   };
 }
 
-async function handler(req, res) {
-  if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
-    return res.status(405).json({ error: 'Method not allowed' });
+function reply(statusCode, body, headers) {
+  return {
+    statusCode: statusCode,
+    headers: Object.assign({ 'Content-Type': 'application/json' }, headers || {}),
+    body: JSON.stringify(body),
+  };
+}
+
+async function handler(event) {
+  if (event.httpMethod !== 'POST') {
+    return reply(405, { error: 'Method not allowed' }, { Allow: 'POST' });
   }
 
   const env = process.env;
   if (!env.RESEND_API_KEY || !env.FROM_EMAIL || !env.NOTIFY_EMAIL) {
     console.error('Missing RESEND_API_KEY, FROM_EMAIL, or NOTIFY_EMAIL');
-    return res.status(500).json({ error: 'Server not configured' });
+    return reply(500, { error: 'Server not configured' });
   }
 
-  let body = req.body || {};
-  if (typeof body === 'string') {
-    try { body = JSON.parse(body); } catch (e) { body = {}; }
+  let body = {};
+  try {
+    const raw = event.isBase64Encoded ? Buffer.from(event.body || '', 'base64').toString('utf8') : event.body;
+    body = JSON.parse(raw || '{}') || {};
+  } catch (e) {
+    body = {};
   }
 
   // Honeypot: real visitors never see or fill this field. Pretend success so bots move on.
-  if (body.company) return res.status(200).json({ ok: true });
+  if (body.company) return reply(200, { ok: true });
 
   const result = validate(body);
   if (result.errors.length) {
-    return res.status(400).json({ error: 'Invalid fields', fields: result.errors });
+    return reply(400, { error: 'Invalid fields', fields: result.errors });
   }
   const lead = result.lead;
 
@@ -283,10 +293,10 @@ async function handler(req, res) {
   const notified = results[0].status === 'fulfilled';
   const saved = sheetsEnabled && results[2].status === 'fulfilled';
   if (!notified && !saved) {
-    return res.status(502).json({ error: 'Could not submit. Please try again.' });
+    return reply(502, { error: 'Could not submit. Please try again.' });
   }
-  return res.status(200).json({ ok: true });
+  return reply(200, { ok: true });
 }
 
-module.exports = handler;
-module.exports.validate = validate;
+exports.handler = handler;
+exports.validate = validate;
