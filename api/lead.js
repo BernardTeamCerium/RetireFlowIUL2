@@ -9,6 +9,8 @@
 //   SITE_URL         optional  Public site URL, used to show the logo in emails, e.g. "https://retireflow.com"
 //   CALLBACK_PHONE   optional  Phone number agents call from, shown in the confirmation email
 //   TIMEZONE         optional  Time zone for the submitted time in notifications (default America/New_York)
+//   SHEETS_WEBHOOK_URL optional Google Apps Script web app URL that appends leads to the Google Sheet
+//   SHEETS_SECRET    optional  Shared secret; must match SHEETS_SECRET in the Apps Script's Script Properties
 
 const RESEND_URL = 'https://api.resend.com/emails';
 
@@ -77,6 +79,34 @@ async function sendEmail(apiKey, payload) {
     throw new Error('Resend ' + res.status + ': ' + text);
   }
   return res.json();
+}
+
+async function saveToSheet(env, lead) {
+  const payload = Object.assign({
+    secret: env.SHEETS_SECRET,
+    submitted_at: lead.submitted_at,
+    first_name: lead.first_name,
+    last_name: lead.last_name,
+    email: lead.email,
+    phone: lead.phone,
+    state: lead.state,
+    priority: lead.priority,
+    consent: lead.consent,
+    page: lead.page,
+  }, lead.tracking);
+  // Apps Script answers with a redirect to the result; fetch follows it.
+  const res = await fetch(env.SHEETS_WEBHOOK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  const text = await res.text().catch(function () { return ''; });
+  let out = null;
+  try { out = JSON.parse(text); } catch (e) { /* not JSON */ }
+  if (!res.ok || !out || !out.ok) {
+    throw new Error('Sheets ' + res.status + ': ' + (out && out.error ? out.error : text.slice(0, 200)));
+  }
+  return out;
 }
 
 function emailShell(inner, siteUrl) {
@@ -219,6 +249,9 @@ async function handler(req, res) {
   const notice = notificationEmail(lead, env);
   const confirm = confirmationEmail(lead, env);
 
+  const sheetsEnabled = Boolean(env.SHEETS_WEBHOOK_URL && env.SHEETS_SECRET);
+  if (env.SHEETS_WEBHOOK_URL && !env.SHEETS_SECRET) console.error('SHEETS_WEBHOOK_URL is set but SHEETS_SECRET is missing; skipping Google Sheet');
+
   const results = await Promise.allSettled([
     sendEmail(env.RESEND_API_KEY, {
       from: env.FROM_EMAIL,
@@ -238,14 +271,18 @@ async function handler(req, res) {
       text: confirm.text,
       tags: [{ name: 'type', value: 'lead_confirmation' }],
     }),
+    sheetsEnabled ? saveToSheet(env, lead) : Promise.resolve('skipped'),
   ]);
 
+  const labels = ['Notification email', 'Confirmation email', 'Google Sheet'];
   results.forEach(function (r, i) {
-    if (r.status === 'rejected') console.error((i === 0 ? 'Notification' : 'Confirmation') + ' email failed:', r.reason && r.reason.message);
+    if (r.status === 'rejected') console.error(labels[i] + ' failed:', r.reason && r.reason.message);
   });
 
-  // The notification is the only record of the lead, so treat its failure as a failed submission.
-  if (results[0].status === 'rejected') {
+  // The lead is captured if it reached you by email or landed in the sheet. Fail only if neither happened.
+  const notified = results[0].status === 'fulfilled';
+  const saved = sheetsEnabled && results[2].status === 'fulfilled';
+  if (!notified && !saved) {
     return res.status(502).json({ error: 'Could not submit. Please try again.' });
   }
   return res.status(200).json({ ok: true });
