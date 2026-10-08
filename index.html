@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What Is an IUL? Free Information from Licensed Professionals | RetireFlow</title>
+  <meta name="description" content="Learn how Indexed Universal Life insurance works, including cash value growth potential, the 0% floor, and the trade-offs. Request free, no-obligation information.">
+  <meta property="og:title" content="What Is an IUL? Free Information from Licensed Professionals | RetireFlow">
+  <meta property="og:description" content="Learn how Indexed Universal Life insurance works, including cash value growth potential, the 0% floor, and the trade-offs. Request free, no-obligation information.">
+  <meta property="og:image" content="assets/retireflow-logo.png">
+  <meta name="theme-color" content="#041C3B">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Header: logo only, no navigation (single-action page) -->
+  <header class="site-header">
+    <div class="container">
+      <a href="#top" class="logo" aria-label="RetireFlow Retirement Planning">
+        <img src="assets/retireflow-logo.png" alt="RetireFlow Retirement Planning" width="600" height="319">
+      </a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-arc" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Indexed Universal Life Insurance</p>
+          <h1>Life Insurance That Protects Your Family <span class="accent">and Builds Cash Value</span></h1>
+          <p class="lede">An IUL gives your loved ones a death benefit and gives you cash value growth potential linked to a market index, with a floor that helps protect against down years. Find out if it fits your plans.</p>
+          <ul class="hero-points">
+            <li>Life insurance first</li>
+            <li>Cash value growth potential</li>
+            <li>0% floor on credited interest</li>
+          </ul>
+        </div>
+
+        <div class="form-card" id="get-info">
+          <h2>Get Your Free IUL Information</h2>
+          <form id="lead-form" novalidate data-endpoint="">
+            <div class="row">
+              <div class="field">
+                <label for="first_name">First name</label>
+                <input id="first_name" name="first_name" type="text" autocomplete="given-name" required>
+              </div>
+              <div class="field">
+                <label for="last_name">Last name</label>
+                <input id="last_name" name="last_name" type="text" autocomplete="family-name" required>
+              </div>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+            </div>
+            <div class="row">
+              <div class="field">
+                <label for="state">State</label>
+                <!-- Trim this list to the states you're licensed in -->
+                <select id="state" name="state" required>
+                  <option value="">Select</option>
+                  <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option>
+                  <option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option>
+                  <option>District of Columbia</option><option>Florida</option><option>Georgia</option><option>Hawaii</option>
+                  <option>Idaho</option><option>Illinois</option><option>Indiana</option><option>Iowa</option>
+                  <option>Kansas</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option>
+                  <option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option>
+                  <option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option>
+                  <option>Nevada</option><option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option>
+                  <option>New York</option><option>North Carolina</option><option>North Dakota</option><option>Ohio</option>
+                  <option>Oklahoma</option><option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option>
+                  <option>South Carolina</option><option>South Dakota</option><option>Tennessee</option><option>Texas</option>
+                  <option>Utah</option><option>Vermont</option><option>Virginia</option><option>Washington</option>
+                  <option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="priority">What's most important to you?</label>
+                <select id="priority" name="priority" required>
+                  <option value="">Select</option>
+                  <option>Protecting my family</option>
+                  <option>Building cash value</option>
+                  <option>Supplementing retirement income</option>
+                  <option>Leaving a legacy</option>
+                  <option>Just exploring</option>
+                </select>
+              </div>
+            </div>
+            <label class="consent">
+              <input type="checkbox" name="consent" id="consent" required>
+              <span>By submitting, I agree that RetireFlow and its licensed agents may contact me by phone, text, or email about life insurance, including via automated technology, at the number provided. Consent is not a condition of purchase. Message and data rates may apply. Reply STOP to opt out. See our <a href="#">Privacy Policy</a>.</span>
+            </label>
+            <p class="form-error" role="alert" hidden></p>
+            <button type="submit" class="btn btn-primary btn-block">Send Me the Information</button>
+            <p class="microcopy">Free. No obligation. A licensed professional will reach out within one business day.</p>
+          </form>
+          <div class="form-success" hidden tabindex="-1">
+            <div class="check" aria-hidden="true">&#10003;</div>
+            <h3>You're all set.</h3>
+            <p>Thanks for reaching out. A licensed professional from RetireFlow will contact you within one business day. Keep an eye out for a call from [phone number].</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust strip (use only claims that are accurate) -->
+    <section class="trust-strip">
+      <div class="container trust-items">
+        <span>Licensed in [#] states</span>
+        <span>[X]+ families served</span>
+        <span>Working with carriers rated A or better by AM Best</span>
+      </div>
+    </section>
+
+    <!-- What is an IUL -->
+    <section class="section">
+      <div class="container narrow">
+        <p class="kicker">What Is an IUL?</p>
+        <h2>IUL in Plain English</h2>
+        <p>Indexed Universal Life is a type of permanent life insurance. Like any life insurance, it pays a death benefit to your beneficiaries. What makes it different is the cash value component.</p>
+        <p>Part of each premium goes into the policy's cash value. That cash value can be credited interest based on how a market index, like the S&amp;P&nbsp;500&reg;, performs. Your money is never directly invested in the market.</p>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section section-tint">
+      <div class="container">
+        <p class="kicker center">How It Works</p>
+        <h2 class="center">How an IUL Works</h2>
+        <div class="cards three">
+          <article class="card">
+            <span class="card-num">1</span>
+            <h3>Protection first</h3>
+            <p>Your policy provides a death benefit to help take care of the people who depend on you.</p>
+          </article>
+          <article class="card">
+            <span class="card-num">2</span>
+            <h3>Growth potential</h3>
+            <p>Cash value can earn interest tied to an index's performance, up to a cap set by the insurer.</p>
+          </article>
+          <article class="card">
+            <span class="card-num">3</span>
+            <h3>A floor for down years</h3>
+            <p>If the index goes negative, a 0% floor means no loss is credited to your cash value for that period.</p>
+          </article>
+        </div>
+        <p class="fine-print center">Policy fees, charges, and cost of insurance still apply and can reduce cash value, even in years with 0% credited interest. Caps and participation rates vary by carrier and can change.</p>
+      </div>
+    </section>
+
+    <!-- Why people consider -->
+    <section class="section">
+      <div class="container">
+        <p class="kicker center">Why People Consider an IUL</p>
+        <h2 class="center">What People Use It For</h2>
+        <div class="uses">
+          <div class="use"><h3>Protecting their family</h3><p>A death benefit that can help replace income, pay off a mortgage, or cover final expenses.</p></div>
+          <div class="use"><h3>Building a living benefit</h3><p>Cash value that may be available through policy loans or withdrawals later in life.</p></div>
+          <div class="use"><h3>Adding to retirement planning</h3><p>Under current tax law, policy loans may give you tax-advantaged access to cash value, alongside a 401(k) or IRA. It doesn't replace them.</p></div>
+          <div class="use"><h3>Leaving a legacy</h3><p>The death benefit generally passes to beneficiaries income-tax-free.</p></div>
+          <div class="use"><h3>Flexibility</h3><p>Within policy limits, premiums and death benefits can often be adjusted as life changes.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The honest part -->
+    <section class="section section-navy">
+      <div class="container honest">
+        <div>
+          <p class="kicker light">The Honest Part</p>
+          <h2>It's Not Right for Everyone, and We'll Tell You If It's Not Right for You</h2>
+          <p>An IUL works best when it's designed correctly, funded consistently, and held for the long term. It's a commitment.</p>
+          <p>Our job is to help you understand all of it, so you can decide with confidence. Sometimes the right answer is term insurance, or something else entirely, and we'll tell you that.</p>
+        </div>
+        <div class="know-box">
+          <h3>Here's what you should know going in:</h3>
+          <ul>
+            <li><strong>Caps</strong> limit how much interest you can be credited in strong market years.</li>
+            <li><strong>Fees and cost of insurance</strong> are higher than term life insurance.</li>
+            <li><strong>Surrender charges</strong> usually apply if you cancel in the early years.</li>
+            <li><strong>Loans and withdrawals</strong> reduce cash value and death benefit, and could create a tax bill if the policy lapses.</li>
+            <li><strong>Results aren't guaranteed.</strong> Illustrations are projections, not promises.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- What happens next -->
+    <section class="section">
+      <div class="container">
+        <p class="kicker center">What Happens Next</p>
+        <h2 class="center">Here's What to Expect</h2>
+        <ol class="steps">
+          <li><span class="step-num">1</span><h3>Request your information</h3><p>Fill out the short form. It takes about a minute.</p></li>
+          <li><span class="step-num">2</span><h3>Have a quick conversation</h3><p>A licensed professional will call to learn about your goals. No pressure, no jargon.</p></li>
+          <li><span class="step-num">3</span><h3>Review your options</h3><p>If an IUL makes sense, you'll see a personalized illustration with both guaranteed and non-guaranteed values explained. If it doesn't, we'll tell you.</p></li>
+        </ol>
+        <div class="center"><a href="#get-info" class="btn btn-primary js-to-form">Get My Free Information</a></div>
+      </div>
+    </section>
+
+    <!-- Meet your advisor (optional, high-trust) -->
+    <section class="section section-tint">
+      <div class="container advisor">
+        <div class="advisor-photo" aria-label="[Advisor photo]">[Photo]</div>
+        <div>
+          <p class="kicker">Meet Your Advisor</p>
+          <h2>Who You'll Be Talking To</h2>
+          <p>[Advisor Name] has helped [X] families in [region] plan for the future through [specialty]. "I got into this business after watching my own parents navigate retirement without a plan. I want every family I work with to feel clear and confident about what they have."</p>
+          <p class="advisor-meta">[License #] &middot; [States licensed]</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <div class="container narrow">
+        <p class="kicker center">FAQ</p>
+        <h2 class="center">Common Questions</h2>
+        <div class="faq">
+          <details>
+            <summary>Is an IUL an investment?</summary>
+            <p>No. An IUL is a life insurance policy. Its cash value is credited interest based on an index's performance, but your money isn't invested directly in the market.</p>
+          </details>
+          <details>
+            <summary>Can I lose money in an IUL?</summary>
+            <p>The 0% floor means negative index performance won't credit a loss. However, policy charges and fees are deducted from cash value, so cash value can decrease, especially in early years or if the policy is underfunded.</p>
+          </details>
+          <details>
+            <summary>Is the cash value tax-free?</summary>
+            <p>Cash value grows tax-deferred. Under current tax law, policy loans are generally not taxable as long as the policy stays in force and isn't a modified endowment contract (MEC). If the policy lapses with an outstanding loan, taxes may be due. Talk to a tax professional about your situation.</p>
+          </details>
+          <details>
+            <summary>How much does an IUL cost?</summary>
+            <p>It depends on your age, health, coverage amount, and how you want to fund it. Policies can be designed for a range of budgets. We'll walk through real numbers on your call.</p>
+          </details>
+          <details>
+            <summary>How is this different from term life insurance?</summary>
+            <p>Term covers you for a set period, usually 10–30 years, and costs less. An IUL is permanent coverage with a cash value component. Many people benefit from term, some from IUL, and some from both.</p>
+          </details>
+          <details>
+            <summary>Will I get a sales pitch?</summary>
+            <p>You'll get a conversation. We'll ask about your goals, explain how things work, and give you an honest take on whether an IUL fits.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+      <div class="hero-arc" aria-hidden="true"></div>
+      <div class="container narrow center">
+        <h2>Get Clear Answers About IULs</h2>
+        <p>Whether you're ready to move forward or just curious, the first step is the same: a free, no-pressure conversation with someone who'll give you straight answers.</p>
+        <a href="#get-info" class="btn btn-light js-to-form">Request My Free Information</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <img class="footer-logo" src="assets/retireflow-logo-white.png" alt="RetireFlow Retirement Planning" width="600" height="319">
+      <div class="disclaimer">
+        <p>RetireFlow is an independent insurance agency. Insurance products are offered through licensed agents in [states]. [Agency license #]. This content is for informational purposes only and isn't tax, legal, or investment advice. Consult a qualified professional about your specific situation.</p>
+        <p>Indexed Universal Life insurance is a life insurance product, not an investment. It does not directly participate in any stock or equity investments. Index-linked interest is subject to caps, participation rates, and other limits, which vary by product and may change. Policy guarantees are subject to the claims-paying ability of the issuing insurance company. Policy loans and withdrawals reduce cash value and death benefit, may cause the policy to lapse, and may have tax consequences. Policies may have surrender charges. Product features and availability vary by state and carrier.</p>
+        <p>S&amp;P&nbsp;500&reg; is a registered trademark of Standard &amp; Poor's Financial Services LLC.</p>
+      </div>
+      <nav class="footer-links" aria-label="Legal">
+        <a href="#">Privacy Policy</a><span aria-hidden="true">&middot;</span><a href="#">Terms</a><span aria-hidden="true">&middot;</span><a href="#">Contact</a>
+      </nav>
+      <p class="copyright">&copy; <span id="year">2026</span> RetireFlow Retirement Planning. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Mobile sticky CTA -->
+  <a href="#get-info" class="sticky-cta js-to-form">Get My Free IUL Information</a>
+
+  <script src="script.js"></script>
+</body>
+</html>
