@@ -121,9 +121,11 @@ p { margin: 0 0 1em; }
 .field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23041C3B' d='M6 8 0 0h12z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
 .field input:focus, .field select:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(8, 123, 130, .18); }
 .field.invalid input, .field.invalid select { border-color: #C0392B; }
-.consent { display: flex; gap: 10px; align-items: flex-start; font-size: .72rem; line-height: 1.5; color: var(--muted); margin: 4px 0 16px; cursor: pointer; }
+.consent { display: flex; gap: 10px; align-items: flex-start; font-size: .76rem; background: var(--bg-tint); border: 1px solid var(--line); border-radius: 8px; padding: 12px; line-height: 1.5; color: var(--muted); margin: 4px 0 16px; cursor: pointer; }
 .consent input { margin-top: 3px; width: 16px; height: 16px; flex: none; accent-color: var(--teal); }
+.consent.invalid { border-color: #C0392B; }
 .consent.invalid span { color: #C0392B; }
+.consent strong { color: var(--navy); font-weight: 600; }
 .form-error { color: #C0392B; font-size: .85rem; margin: -6px 0 12px; }
 .microcopy { font-size: .82rem; color: var(--muted); text-align: center; margin: 12px 0 0; }
 .form-success { text-align: center; padding: 24px 6px; }
