@@ -126,6 +126,7 @@ p { margin: 0 0 1em; }
 .consent.invalid { border-color: #C0392B; }
 .consent.invalid span { color: #C0392B; }
 .consent strong { color: var(--navy); font-weight: 600; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form-error { color: #C0392B; font-size: .85rem; margin: -6px 0 12px; }
 .microcopy { font-size: .82rem; color: var(--muted); text-align: center; margin: 12px 0 0; }
 .form-success { text-align: center; padding: 24px 6px; }

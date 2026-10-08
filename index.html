@@ -45,7 +45,7 @@
 
         <div class="form-card" id="get-info">
           <h2>Get Your Free IUL Information</h2>
-          <form id="lead-form" novalidate data-endpoint="">
+          <form id="lead-form" novalidate data-endpoint="/api/lead">
             <div class="row">
               <div class="field">
                 <label for="first_name">First name</label>
@@ -101,6 +101,11 @@
               <input type="checkbox" name="consent" id="consent" required>
               <span>By checking this box, I agree that a licensed professional from RetireFlow may contact me by <strong>phone call, text message, or email</strong>, at the phone number and email I provided, to schedule a free educational session about life insurance, including Indexed Universal Life (IUL), and how it may help me. <strong>This is not a sales call.</strong> The session is strictly informational, and I am under no obligation to buy anything. Calls and texts may use automated technology. Consent is not a condition of purchase. Message and data rates may apply. Reply STOP to opt out of texts at any time. See our <a href="#">Privacy Policy</a>.</span>
             </label>
+            <!-- Spam trap: hidden from people, bots fill it in -->
+            <div class="hp" aria-hidden="true">
+              <label for="company">Company</label>
+              <input id="company" name="company" type="text" tabindex="-1" autocomplete="off">
+            </div>
             <p class="form-error" role="alert" hidden></p>
             <button type="submit" class="btn btn-primary btn-block">Send Me the Information</button>
             <p class="microcopy">Free. No obligation. A licensed professional will reach out within one business day to set up a free educational session.</p>
@@ -108,7 +113,7 @@
           <div class="form-success" hidden tabindex="-1">
             <div class="check" aria-hidden="true">&#10003;</div>
             <h3>You're all set.</h3>
-            <p>Thanks for reaching out. A licensed professional from RetireFlow will contact you within one business day. Keep an eye out for a call from [phone number].</p>
+            <p>Thanks for reaching out. A licensed professional from RetireFlow will contact you within one business day. We just sent a confirmation to your email.</p>
           </div>
         </div>
       </div>
